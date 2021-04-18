@@ -31,7 +31,7 @@ public class Shooting : MonoBehaviour
     void Update ()
     {
         // shoot a projectile when we touch the screen
-        if(Input.touchCount > 0)
+        if(Input.touchCount > 0 || Input.GetMouseButton(0))
         {
             if(Time.time - lastShootTime >= shootRate)
                 Shoot();
@@ -42,6 +42,8 @@ public class Shooting : MonoBehaviour
     void Shoot ()
     {
         lastShootTime = Time.time;
+
+        //Input.touches[0];
 
         GameObject proj = Instantiate(projectilePrefab, cam.transform.position, Quaternion.identity);
 
@@ -54,8 +56,17 @@ public class Shooting : MonoBehaviour
     public void PlaceCore ()
     {
         core.SetActive(true);
-        core.transform.position = placementIndicator.transform.position;
-        placementIndicator.gameObject.SetActive(false);
+        if (UnityEngine.XR.ARFoundation.ARSession.state != UnityEngine.XR.ARFoundation.ARSessionState.None)
+        {
+            core.transform.position = placementIndicator.transform.position;
+            placementIndicator.gameObject.SetActive(false);
+        }
+        else
+        {
+            core.transform.position = cam.transform.forward * 3.0f;
+            GetComponent<NonARCameraMovement>().enabled = true;
+            GetComponent<SoundManager>().enabled = true;
+        }
         placeCoreButton.SetActive(false);
         EnemySpawner.instance.canSpawnEnemies = true;
     }
