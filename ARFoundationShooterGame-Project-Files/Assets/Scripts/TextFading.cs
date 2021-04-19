@@ -18,10 +18,10 @@ public class TextFading : MonoBehaviour
     private Text textComponent;
     private float timer = 0.0f;
     private string[] narrativeText = {
-        "test 1",
-        "test 2",
-        "test 3",
-        "test 4"
+        "In 1991, a city-sized spacecraft crashes in Vancouver island on Earth. Over the course of 30 years the military organization "
+            + "Banana Space Agency reverse-engineers its technology and rebuilds the spacecraft, naming it 'You Only Live Once'.",
+        "The top pilot in the Banana Space Agency finally restored the spacecraft.\nMeanwhile, the alien mother battleship detects the "
+            + "spacecraft and begins to rescue the spacecraft and the hibernated alien inside..."
     };
     private int currentTextIndex = 0;
 
